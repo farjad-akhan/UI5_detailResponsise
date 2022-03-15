@@ -1,0 +1,171 @@
+<mvc:View controllerName="UI5_new.controller.Master" xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout.cssgrid" xmlns:mvc="sap.ui.core.mvc">
+	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Products " />
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- DynamicPage Content -->
+		<f:content>
+			<VBox fitContainer="true">
+				<OverflowToolbar class="sapFDynamicPageAlignContent">
+					<ToolbarSpacer />
+					<SearchField liveChange=".onSearch" width="65%" />
+					<OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onAdd" />
+					<OverflowToolbarButton icon="sap-icon://sort" text="Sort" type="Transparent" press=".onSort" />
+				</OverflowToolbar>
+				<Table id="productsTable" inset="false" items="{
+						path: 'products>/ProductCollection',
+						sorter: {
+							path: 'Name'
+						}
+					}" class="sapFDynamicPageAlignContent" width="auto">
+					<columns>
+
+						<!-- <Column  demandPopin="true" minScreenWidth="phone" >
+							<Text text="Product"/>
+						</Column>
+						
+						<Column demandPopin="true" minScreenWidth="tablet">
+							<Text text="Category"/>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="tablet">
+							<Text text="Description"/>
+						</Column>
+						<Column demandPopin="true" minScreenWidth="phone">
+							<Text text="Rating"/>
+						</Column>
+						<Column	 demandPopin="true" minScreenWidth="phone" hAlign="End">
+							<Text text="Price"/>
+						</Column> -->
+
+						<Column></Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation" press=".onListItemPress">
+							<cells>
+								<f:GridList>
+									<!-- <f:customLayout>
+										<grid:ResponsiveColumnLayout />
+									</f:customLayout> -->
+
+									<f:GridListItem>
+										<VBox>
+											<HBox justifyContent="SpaceBetween">
+												<VBox>
+													<HBox justifyContent="SpaceBetween" class="sapUiSmallMargin">
+														<ObjectIdentifier title="{products>Name}" text="{products>ProductId}" />
+													</HBox>
+													<HBox class="sapUiSmallMargin">
+														<core:Icon src="sap-icon://product" class="sapUiTinyMarginEnd " color="Default" />
+														<Text text="Electronics" />
+													</HBox>
+
+
+												</VBox>
+												<VBox class="sapUiSmallMargin">
+													<ObjectStatus text="{products>state}" state="{= ${products>state} === 'In-stock' ? 'Success' : 'Error'}" inverted="true" />
+												</VBox>
+												<VBox>
+													<HBox>
+														<RatingIndicator maxValue="5" class="sapUiSmallMargin" value="4" tooltip="Rating Tooltip" editable="false" />
+													</HBox>
+
+													<HBox class="sapUiSmallMargin">
+														<core:Icon src="sap-icon://money-bills" class="sapUiSmallMarginEnd" color="Default" />
+														<ObjectNumber number="{products>Price}" numberUnit="{products>CurrencyCode}" class="sapUiSmallMarginEnd" />
+													</HBox>
+												</VBox>
+
+											</HBox>
+											<HBox class="sapUiSmallMargin">
+												<core:Icon src="sap-icon://hint" class="sapUiSmallMarginEnd" color="Default" />
+												<ObjectIdentifier text="{products>Description}" />
+
+											</HBox>
+										</VBox>
+									</f:GridListItem>
+
+									<!-- <f:GridListItem>
+										<f:layoutData>
+											<grid:ResponsiveColumnItemLayoutData columns="2" rows="1" />
+										</f:layoutData>
+										
+										<ObjectIdentifier title="{products>Name}" text="{products>ProductId}" class="sapUiSmallMargin"/>
+									</f:GridListItem>
+									<f:GridListItem>
+										<f:layoutData>
+											<grid:ResponsiveColumnItemLayoutData columns="2" rows="1" />
+										</f:layoutData>
+										<RatingIndicator maxValue="5" class="sapUiSmallMargin" value="4" tooltip="Rating Tooltip" editable="false"/>
+
+									</f:GridListItem>
+									<f:GridListItem>
+										<f:layoutData>
+											<grid:ResponsiveColumnItemLayoutData columns="2" rows="1" />
+										</f:layoutData>
+										<core:Icon src="sap-icon://product"  class="sapUiSmallMargin">  </core:Icon>
+										<Label text="Electronics" />
+									</f:GridListItem>
+									
+								
+									<f:GridListItem>
+										<f:layoutData>
+											<grid:ResponsiveColumnItemLayoutData columns="2" rows="1" />
+										</f:layoutData>
+										<HBox class="sapUiSmallMargin">
+											<core:Icon src="sap-icon://money-bills"  class="sapUiSmallMarginEnd">  </core:Icon>
+										<ObjectNumber number="{products>Price}" numberUnit="{products>CurrencyCode}" />
+										</HBox>
+									
+									</f:GridListItem>
+									<f:GridListItem>
+										<f:layoutData>
+											<grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
+										</f:layoutData>
+									
+											<core:Icon src="sap-icon://hint"  class="sapUiSmallMargin">  </core:Icon>
+										<Label text="{products>Description}" />
+									</f:GridListItem> -->
+
+									<!-- <ObjectIdentifier title="{products>Name}" text="{products>ProductId}" /> -->
+									<!-- <core:Icon src="sap-icon://product"> </core:Icon> -->
+									<!-- <ObjectNumber
+									number="{
+										parts:[
+											{path:'products>Price'},
+											{path:'products>CurrencyCode'}
+										],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false}
+									}"
+									unit="{products>CurrencyCode}"/> -->
+
+									<!--  									
+										<ObjectAttribute text="Electronics" />
+										<ObjectAttribute text="{products>Description}" />
+										<RatingIndicator  maxValue="5" class="sapUiSmallMarginBottom" value="4" tooltip="Rating Tooltip" editable="false"/>
+										<ObjectNumber number="{products>Price}" numberUnit="{products>CurrencyCode}"/> -->
+
+								</f:GridList>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</f:content>
+
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button type="Accept" text="Accept" />
+				<Button type="Reject" text="Reject" />
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,145 @@
+<mvc:View
+controllerName="UI5_new.controller.Master"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc">
+	<ObjectPageLayout
+		id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="false"
+		isChildPage="true"
+		upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<actions>
+					<!-- <m:ToggleButton
+						text="Edit"
+						type="Emphasized"/>
+					<m:Button
+						text="Delete"
+						type="Transparent"/>
+					<m:Button
+						text="Copy"
+						type="Transparent"/> -->
+					<m:Button
+						icon="sap-icon://navigation-left-arrow"
+						type="Transparent"
+                        press=".back"/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+				<f:Avatar
+					displaySize="L"
+					displayShape="Square"
+					class="sapUiTinyMarginEnd">
+				</f:Avatar>
+				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+					<m:Title text="Main Category " />
+					<m:Label  text="Electronics"/>
+				</m:VBox>
+				<!-- <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+					<m:Label text="Subcategory"/>
+				</m:VBox> -->
+				<!-- <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+					<m:Label text="Price"/>
+				</m:VBox> -->
+			</m:FlexBox>
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection title="General Information">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<form:SimpleForm
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+								
+								<form:content>
+									
+										<m:VBox>
+											<!-- <m:Text text="Image:" class="sapUiSmallMarginBottom" /> -->
+											<m:Carousel class="sapUiContentPadding" loop="true">
+											<m:Image class="sapUiResponsivePadding" src="{products>/img1}" width="50%" />
+											<m:Image class="sapUiResponsivePadding" src="{products>/img2}" width="50%" />
+											</m:Carousel>
+										</m:VBox>
+								                                                                           
+								</form:content>
+
+								<form:content>
+									<!-- <m:HBox justifyContent="SpaceBetween"> -->
+                                    <m:VBox class="sapUiResponsivePadding" >
+                                    <m:HBox class="sapUiResponsiveMargin">
+                                    <m:Label design="Bold" text="Name : " />
+									<m:Text text="{products>/details/Name}"/>
+                                    </m:HBox>
+                                   
+                                        <m:HBox class="sapUiResponsiveMargin">
+                                            <m:Label design="Bold" text="Price : " class="sapUiResponsivePaddingTop" />
+                                            <m:Text text="{products>/details/Price} {products>/details/CurrencyCode}"/>
+                                            </m:HBox >
+                                            <m:HBox class="sapUiResponsiveMargin">
+                                            <m:Label design="Bold" text="Description : " />
+                                            <m:Text text="{products>/details/Description}"/>
+                                            </m:HBox>
+											<m:HBox class="sapUiResponsiveMargin">
+                                            <m:Label design="Bold" text="Rating : " class="sapUiSmallMarginTop" />
+											<m:RatingIndicator class="sapUiSmallMargin"  maxValue="5" value="4" tooltip="Rating Tooltip" editable="false"/>
+                                            </m:HBox>
+											<m:HBox class="sapUiResponsiveMargin">
+                                            <m:Label design="Bold" text="Status : " />
+                                            <m:ObjectStatus class="sapUiSmallMarginBegin" text="{products>/details/state}" state="{= ${products>/details/state} === 'In-stock' ? 'Success' : 'Error'}" 
+												inverted="true"
+												/>
+                                            </m:HBox>
+                                        </m:VBox> 
+										                                                                         
+								</form:content>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection title="User Reviews">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<m:Table
+								
+								items="{path : 'products>/details/UserReviews'}">
+								<m:columns>
+									<m:Column/>
+									<m:Column hAlign="End"/>
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem type="Navigation" press=".onReveiwPress">
+										<m:cells>
+											<m:ObjectIdentifier text="{products>text}"/>
+											<m:ObjectStatus class="sapUiSmallMarginBegin" text="{products>ue}" state="{= ${products>ue} === 'Good'  ? 'Success' : 'Error'}" ></m:ObjectStatus>
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

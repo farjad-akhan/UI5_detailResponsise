@@ -1,0 +1,89 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:f="sap.ui.layout.form"
+   xmlns:u="sap.ui.unified"
+   xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" >
+   <Dialog 
+     id="formDialog"
+      title="{i18n>openDialogButtonText}">
+     
+      <!-- Dialog Box Form -->
+
+      <VBox class="sapUiSmallMargin">
+         <f:SimpleForm  
+            editable="true"
+            layout="ResponsiveGridLayout"
+            labelSpanXL="4"
+            labelSpanL="3"
+            labelSpanM="4"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="0"
+            emptySpanL="4"
+            emptySpanM="0"
+            emptySpanS="0"
+            columnsXL="2"
+            columnsL="1"
+            columnsM="1"
+            singleContainerFullSize="false"
+            ariaLabelledBy="Title1" >
+            
+            <f:content>
+   <!-- products Info -->
+               <Toolbar ariaLabelledBy="Title2">
+                  <Title id="Title2" text="products Info"/>
+               </Toolbar>
+               <Label text="Product Name" design="Bold"/>
+               <Input value="{products>/pData/Name}" type="Text" required="true" width="90%" />
+                <Label text="Company Name" design="Bold"/>
+                <Input value="{products>/pData/ProductId}" type="Text" required="true" width="90%"/>
+                    <Label required="true" text="Description" design="Bold"/>
+                    <TextArea  value="{products>/pData/Description}" showExceededText="true" maxLength="40" width="90%"  valueState="{= ${/value}.length > 40 ? 'Warning' : 'None' }" valueLiveUpdate="false" liveChange="handleLiveChange" />
+                    <Label text="Currency " design="Bold"/>
+                   
+                        <ComboBox 
+               width="90%"
+               required="true"
+           
+                value="{products>/pData/CurrencyCode}"  
+                items="{
+                     path: 'products>/CC'	
+                     }"
+                     >
+                     <core:ListItem  text="{products>text}" />		
+               </ComboBox>
+                        <Label text="Price" design="Bold" />
+                    <Input value="{products>/pData/Price}" type="Number" required="true" width="90%"/>
+             
+
+            <Label text="Product Rating"  design="Bold" required="true" class="sapUiSmallMarginTop"/>
+            <RatingIndicator
+            class="sapUiSmallMarginBottom"   iconSize="8%" value="{products>/pData/product_rating}" />
+            
+
+               
+              
+            </f:content>
+         </f:SimpleForm>
+      </VBox>
+ 
+ 
+  <endButton>
+    <Button text="Save" press=".saveBtn"/>
+   <Button
+   type="Accept"
+   icon="sap-icon://accept"
+      text="{i18n>dialogSubmitButtonText}"
+      press=".onSubmitDialog"/>
+</endButton>
+      <beginButton>
+         <Button icon="sap-icon://decline"
+         type="Reject"
+            text="{i18n>dialogCloseButtonText}"
+            press=".onCloseDialog"/>
+      </beginButton>
+     
+   </Dialog>
+</core:FragmentDefinition>

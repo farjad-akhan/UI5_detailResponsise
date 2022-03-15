@@ -1,0 +1,162 @@
+<mvc:View
+controllerName="UI5_new.controller.Master"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc">
+	<ObjectPageLayout
+		id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="false"
+		isChildPage="true"
+		upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<actions>
+					<!-- <m:ToggleButton
+						text="Edit"
+						type="Emphasized"/>
+					<m:Button
+						text="Delete"
+						type="Transparent"/>
+					<m:Button
+						text="Copy"
+						type="Transparent"/> -->
+					<m:Button
+						icon="sap-icon://navigation-left-arrow"
+						type="Transparent"
+                        press=".Uback"/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+				<f:Avatar
+					displaySize="L"
+					displayShape="Circle"
+					class="sapUiTinyMarginEnd">
+				</f:Avatar>
+                <m:HBox>
+				<m:VBox justifyContent="Center" class="sapUiSmallMarginBegin">
+					<m:Title text="User" />
+					<m:Label  text="{products>/User/name}"/>
+				</m:VBox>
+                <core:Icon src="sap-icon://sys-enter-2"  class="sapUiSmallMargin" color="Default"/>
+            </m:HBox>
+            <m:VBox class="sapUiSmallMarginTop">
+                <m:Title text="Recommend:" class="sapUiSmallMarginBegin" />
+                <m:ProgressIndicator
+            class="sapUiSmallMarginBegin"
+            percentValue="30"
+            displayValue="30%"
+            showValue="true"
+            state="Information" />
+            </m:VBox>
+            
+			</m:FlexBox>
+            <!-- <m:RatingIndicator class="sapUiSmallMargin"  maxValue="5" value="{products>/User/rating}" tooltip="Rating Tooltip" editable="false"/> -->
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection class="sapUiLargeMarginBegin" title="{products>/User/name}'s Review">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<form:SimpleForm
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+								
+								<!-- <form:content>
+									
+										<m:VBox>
+											<m:Text text="Image:" class="sapUiSmallMarginBottom" />
+											<m:Image class="sapUiResponsivePadding" src="{products>/img}" width="50%" />
+											</m:VBox>
+								                                                                           
+								</form:content> -->
+
+								<form:content>
+									<!-- <m:HBox justifyContent="SpaceBetween"> -->
+                                    <m:VBox class="sapUiResponsivePadding" >
+                                        <m:HBox  justifyContent="SpaceBetween">
+                                            <!-- <m:Label design="Bold" text="Rating : " class="sapUiSmallMarginTop" /> -->
+                                            <m:RatingIndicator class="sapUiSmallMargin"  maxValue="5" value="{products>/User/rating}" tooltip="Rating Tooltip" editable="false"/>
+                                                <m:ObjectStatus class="sapUiSmallMargin" text="{products>/User/ue}" state="{= ${products>/User/ue} === 'Good'  ? 'Success' : 'Error'}" 
+                                                    inverted="true"
+                                                    />    
+                                        </m:HBox>
+                                        <m:HBox >
+                                            <core:Icon src="sap-icon://end-user-experience-monitoring"  class="sapUiSmallMargin" color="orange"/>  
+                                            <m:Label design="Bold" class="sapUiSmallMargin" text="{products>/User/text}"/>
+                                        </m:HBox >
+                                    <m:HBox >
+                                    <!-- <m:Label design="Bold" text="Product Name : " /> -->
+                                    <core:Icon src="sap-icon://product"  class="sapUiSmallMargin" color="green"/> 
+									<m:Label design="Bold" class="sapUiSmallMargin"  text=" {products>/details/Name}"/>
+                                    </m:HBox>
+                                    
+                                        
+                                            <!-- <m:Label design="Bold" text="Price : " class="sapUiResponsivePaddingTop" /> -->
+                                           
+                                            <!-- <m:RatingIndicator   maxValue="5" value="{products>/User/rating}" tooltip="Rating Tooltip" editable="false"/> -->
+
+                                            <!-- <m:Text text="{products>/details/Price} {products>/details/CurrencyCode}"/> -->
+                                           
+                                            <m:HBox >
+                                            <!-- <m:Label design="Bold" text="Description : " /> -->
+                                            <core:Icon src="sap-icon://hint"  class="sapUiSmallMargin" color="blue"/>
+                                            <m:Text class="sapUiSmallMargin" text="{products>/details/Description}"/>
+                                            </m:HBox>
+                                               
+											<!-- <m:HBox class="sapUiResponsiveMargin">
+                                            <m:Label design="Bold" text="User Expirience : " />
+                                            <m:ObjectStatus class="sapUiSmallMarginBegin" text="{products>/User/ue}" state="{= ${products>/User/ue} === 'Good'  ? 'Success' : 'Error'}" 
+												inverted="true"
+												/>
+                                            </m:HBox> -->
+                                        </m:VBox> 
+										                                                                         
+								</form:content>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<!-- <ObjectPageSection title="User Reviews">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<m:Table
+								
+								items="{path : 'products>/details/UserReviews'}">
+								<m:columns>
+									<m:Column/>
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem type="Navigation" press=".onReveiwPress">
+										<m:cells>
+											<m:ObjectIdentifier text="{products>text}"/>
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection> -->
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>
